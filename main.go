@@ -10,6 +10,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"golang.org/x/time/rate"
 )
 
 func setupAws() {
@@ -26,6 +27,10 @@ func setupRouter() *echo.Echo {
 	server.Use(middleware.Recover())
 	server.Use(middleware.Logger())
 	server.Use(middleware.BodyLimit("5M"))
+	server.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(rate.Limit(20))))
+	server.Use(middleware.Gzip())
+	server.Use(middleware.Decompress())
+	server.Use(middleware.Secure())
 
 	authReq := server.Group("/")
 	authReq.Use(mw.Auth)
