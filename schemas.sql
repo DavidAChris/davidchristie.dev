@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS users
 (
     id       INTEGER PRIMARY KEY NOT NULL,
     name     TEXT                NOT NULL,
-    email    TEXT                NOT NULL,
-    phone    TEXT                NOT NULL,
+    email    TEXT            UNIQUE    NOT NULL,
+    phone    TEXT        UNIQUE        NOT NULL,
     password TEXT                NOT NULL
 );
 
@@ -21,4 +21,4 @@ CREATE TABLE IF NOT EXISTS sessions (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-INSERT INTO users (name, email, phone, password) VALUES ('David', 'david.christiea@gmail.com', '7274002140', 'password');
+INSERT INTO users (name, email, phone, password) VALUES ('David', 'david.christiea@gmail.com', '1234567890', 'password');
