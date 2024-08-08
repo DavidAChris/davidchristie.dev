@@ -25,6 +25,7 @@ func setupRouter() *echo.Echo {
 	server := echo.New()
 	server.Use(middleware.Recover())
 	server.Use(middleware.Logger())
+	server.Use(middleware.BodyLimit("5M"))
 
 	authReq := server.Group("/")
 	authReq.Use(mw.Auth)
