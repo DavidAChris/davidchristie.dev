@@ -1,9 +1,6 @@
 templ:
 	@templ generate
 
-tailwind:
-	pnpm tailwindcss -i .\tailwind.css -o static/style.css
-
 run: templ
 	@go run .
 
@@ -15,4 +12,3 @@ clean:
 
 tidy:
 	go mod tidy
-	
