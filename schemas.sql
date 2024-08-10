@@ -1,24 +1,39 @@
-CREATE TABLE IF NOT EXISTS users
-(
-    id       INTEGER PRIMARY KEY NOT NULL,
-    name     TEXT                NOT NULL,
-    email    TEXT            UNIQUE    NOT NULL,
-    phone    TEXT        UNIQUE        NOT NULL,
-    password TEXT                NOT NULL
+CREATE TABLE IF NOT EXISTS Users (
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS posts
-(
-    id      INTEGER PRIMARY KEY NOT NULL,
-    user_id INTEGER             NOT NULL,
-    post    TEXT                NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
-);
-
-CREATE TABLE IF NOT EXISTS sessions (
-    session_id TEXT PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS WorkExperiences (
+    work_exp_id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    company_name TEXT NOT NULL,
+    job_title TEXT NOT NULL,
+    location TEXT,
+    start_date DATE,
+    end_date DATE,
+    description TEXT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO users (name, email, phone, password) VALUES ('David', 'david.christiea@gmail.com', '1234567890', 'password');
+CREATE TABLE IF NOT EXISTS Skills(
+    skill_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    skill_name TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS Sessions (
+    session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    token TEXT NOT NULL UNIQUE,
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
