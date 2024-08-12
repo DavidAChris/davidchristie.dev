@@ -4,3 +4,5 @@ venv
 *.db
 .env
 *.sum
+/views
+/static

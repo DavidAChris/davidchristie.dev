@@ -2,7 +2,6 @@ package main
 
 import (
 	"davidchristie-dev/database"
-	"davidchristie-dev/handlers"
 	"davidchristie-dev/services"
 	"log"
 
@@ -34,12 +33,13 @@ func setupRouter() *echo.Echo {
 
 	authReq := server.Group("/")
 	authReq.Use(mw.Auth)
-	authReq.GET("/", handlers.Home)
-	authReq.GET("home", handlers.Home)
+	authReq.File("/", "./views/index.html")
+	authReq.File("home", "./views/index.html")
 
-	server.Static("/static", "static")
-	server.GET("/login", handlers.Login)
-	server.GET("/signup", handlers.Signup)
+	server.File("/login", "./views/login.html")
+	server.File("/signup", "./views/signup.html")
+
+	server.Static("/", "./static/")
 	return server
 }
 

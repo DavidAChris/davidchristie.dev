@@ -71,7 +71,8 @@ func ConfigAws() (*S3Serivce, *S3Details) {
 		log.Fatal("Config Failure")
 	}
 	s3Svc := NewS3Service(awsConfig)
-	bucketName := os.Getenv("BUCKET_NAME")
+	// bucketName := os.Getenv("BUCKET_NAME")
+	bucketName := "david-christie-enterprise-tf-state-us"
 	if bucketName == "" {
 		log.Fatal("BUCKET_NAME ENV REQUIRED")
 	}

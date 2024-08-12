@@ -1,9 +1,10 @@
 package models
 
 type User struct {
-	Id       uint64 `db:"id"`
-	Name     string `json:"name" db:"name"`
-	Email    string `json:"email" db:"email"`
-	Phone    string `json:"phone" db:"phone"`
-	Password string `json:"password" db:"password"`
+	UserId       uint64 `db:"user_id"`
+	UserName     string `json:"username" db:"username"`
+	Name         string `json:"name" db:"name"`
+	Email        string `json:"email" db:"email"`
+	Phone        string `json:"phone" db:"phone"`
+	PasswordHash string `json:"password,omitempty" db:"password_hash"`
 }
